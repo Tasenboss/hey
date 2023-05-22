@@ -1,0 +1,13 @@
+// ...
+	port: 8002,
+	crossDomainPort: 8003,
+// ...
+// ON PRODUCTION SERVER (SSL) (PROXY PASSED BY NGINX)
+	getServerInfo: (req) => {
+		return { hostname: new URL(`https://${req.headers.host}`).hostname, port: 443, crossDomainPort: 443, protocol: 'https:' };
+	},
+// ON DEVELOPMENT SERVER
+	getServerInfo: () => ({ hostname: new URL(`https://${req.headers.host}`).hostname, port: 8002, crossDomainPort: 8002, protocol: 'http:' }),
+// ...
+	password: null,
+// ...
